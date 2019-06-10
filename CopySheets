@@ -8,14 +8,17 @@ Dim finalReportWorkbook As Workbook
 Set finalReportWorkbook = Workbooks("201905_EMH.xlsx")
 
 Dim weeklyReportSheet As Worksheet
+Dim Fileslist as Range
+Dim File as Range
+Set Fileslist = Range("FilesList")
 
-
-
-weeklyReportSheet.Copy After:=finalReportWorkbook.Sheets(finalReportWorkbook.Sheets.Count)
+For Each File In Fileslist
+file.Sheets(2).Copy After:=finalReportWorkbook.Sheets(finalReportWorkbook.Sheets.Count)
 With finalReportWorkbook.Sheets(finalReportWorkbook.Sheets.Count).UsedRange
 .Value = .Value
-End With
 
+End With
+    
 Application.ScreenUpdating = True
 
 End Sub

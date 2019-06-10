@@ -13,12 +13,16 @@ Dim File as Range
 Set Fileslist = Range("FilesList")
 
 For Each File In Fileslist
-file.Sheets(2).Copy After:=finalReportWorkbook.Sheets(finalReportWorkbook.Sheets.Count)
+Workbooks.Open File
+Set Filename = ActiveWorkbook.Name
+Sheets(2).Copy After:=finalReportWorkbook.Sheets(finalReportWorkbook.Sheets.Count)
 With finalReportWorkbook.Sheets(finalReportWorkbook.Sheets.Count).UsedRange
 .Value = .Value
 
 End With
-    
+Workbooks(Filename).Close SaveChanges:=False
+next
+
 Application.ScreenUpdating = True
 
 End Sub

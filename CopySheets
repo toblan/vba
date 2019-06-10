@@ -2,26 +2,26 @@ Sub CopySheets()
 
 Application.ScreenUpdating = False
 
+
 Dim weeklyReportWorkbook As Workbook
 Dim finalReportWorkbook As Workbook
 
-Set finalReportWorkbook = Workbooks("201905_EMH.xlsx")
+Set finalReportWorkbook = Workbooks("201905_EMH.xlsm")
 
 Dim weeklyReportSheet As Worksheet
-Dim Fileslist as Range
-Dim File as Range
+Dim Fileslist As Range
+Dim File As Range
 Set Fileslist = Range("FilesList")
 
 For Each File In Fileslist
 Workbooks.Open File
-Set Filename = ActiveWorkbook.Name
+Filename = ActiveWorkbook.Name
 Sheets(2).Copy After:=finalReportWorkbook.Sheets(finalReportWorkbook.Sheets.Count)
-With finalReportWorkbook.Sheets(finalReportWorkbook.Sheets.Count).UsedRange
-.Value = .Value
-
-End With
+Workbooks(Filename).Sheets(2).UsedRange.Copy
+finalReportWorkbook.Sheets(finalReportWorkbook.Sheets.Count).Range("A1").PasteSpecial Paste:=xlPasteValues
+Application.CutCopyMode = False
 Workbooks(Filename).Close SaveChanges:=False
-next
+Next
 
 Application.ScreenUpdating = True
 
